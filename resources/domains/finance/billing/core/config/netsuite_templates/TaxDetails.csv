@@ -1,0 +1,12 @@
+﻿Name;Type
+calcDetail;string
+grossAmount;double
+lineName;string
+lineType;string
+netAmount;double
+taxAmount;double
+taxBasis;double
+taxCode;RecordRef
+taxDetailsReference;string
+taxRate;double
+taxType;RecordRef

@@ -1,0 +1,22 @@
+version: '1.0'
+connection_id: 'api_template'
+connection_type: 'API'
+enabled: false
+
+api:
+  base_url: 'https://api.example.com'
+  authentication:
+    type: 'bearer'  # bearer, api_key, oauth2
+    token_path: '${secrets/api/token}'
+  rate_limiting:
+    requests_per_second: 10
+    batch_size: 100
+  retry:
+    max_attempts: 3
+    backoff_multiplier: 2
+
+destination:
+  catalog: 'teamblue_finance'
+  schema: 'default'
+  volume: 'sagacity-data-teamblue-finance-dev'
+  base_path: 'raw/billing'

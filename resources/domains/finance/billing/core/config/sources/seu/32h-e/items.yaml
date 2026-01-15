@@ -1,0 +1,27 @@
+version: '1.0'
+entity_code: '32H-E'
+region: 'SEU'
+enabled: true
+
+connection:
+  connection_ref: 'api_entersoft'
+  
+document:
+  document_type: 'items'
+  file_pattern: '*.json'
+  format: 'json'
+  json_options:
+    multiline: true
+  json_column_extract: 'Rows'
+  
+contract:
+  contract_path: 'contracts/SEU/32H-E/items/contract.csv'
+  
+transformations:
+  custom_module:  # Optional
+  custom_function:  # Optional, if empty uses generic transformation
+  
+paths:
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/seu/32h-e/items'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/'
+

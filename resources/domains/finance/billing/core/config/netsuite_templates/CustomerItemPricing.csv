@@ -1,0 +1,5 @@
+Name;Type
+currency;RecordRef
+item;RecordRef
+level;RecordRef
+price;double

@@ -1,0 +1,33 @@
+version: '1.0'
+entity_code: '11T'
+region: 'benelux'
+enabled: true
+
+connection:
+  connection_ref: 'sftp_donnington'
+  source_path: 'BEL/11T/ingress/prod/'
+
+is_zip: true
+  
+document:
+  document_type: 'providers'
+  file_pattern: '*providers.csv'
+  format: 'csv'
+  csv_options:
+    quote: "\""
+    encoding: 'UTF-16'
+    header: true
+    delimiter: ';'
+    inferSchema: true 
+  
+contract:
+  contract_path: 'contracts/benelux/11t/providers/contract.yaml'
+  
+transformations:
+  custom_module: #'resources.domains.finance.billing.core.transformations.custom.benelux.11.providers'  # Optional
+  custom_function: 'transform_invoice'  # Optional, if empty uses generic transformation
+  
+paths:
+  # Auto-constructed from connection + entity + region + document_type
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/benelux/11t/providers'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/invoice'

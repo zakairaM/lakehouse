@@ -1,0 +1,6 @@
+Name;Type
+address;RecordRef
+id;long
+nexus;RecordRef
+nexusCountry;Country
+taxRegistrationNumber;string

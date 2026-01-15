@@ -1,0 +1,5 @@
+Name;Type
+contribution;double
+employee;RecordRef
+isPrimary;boolean
+salesRole;RecordRef

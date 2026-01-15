@@ -1,0 +1,58 @@
+version: '1.0'
+entity_code: '31A'
+region: 'benelux'
+enabled: true
+
+connection:
+  connection_ref: 'sftp_donnington'
+  source_path: 'ITA/31A/ingress/prod/'
+
+is_zip: true
+
+document:
+  document_type: 'transactions'
+  file_pattern: '*primanota*'
+  format: 'txt'
+  csv_options:
+    quote: "\""
+    encoding: 'UTF-8'
+    header: false
+    delimiter: '\t'
+    inferSchema: false
+  header_schema:
+    - sap_company_code
+    - document_number
+    - posting_date
+    - document_date
+    - document_type
+    - reference
+    - document_currency
+    - header_descriptions
+    - accounting_key
+    - account_code
+    - position_amount
+    - vat_code
+    - payment_condition
+    - payment_method
+    - taxable_amount
+    - wbs_element
+    - position_description
+    - product_code
+    - contract_start_date
+    - contract_end_date
+    - vat_amount
+    - payment_auth_code
+    - entersoft_mark_id
+    - entersoft_invoice_url
+    - doc_position
+  
+contract:
+  contract_path: 'contracts/seu/31a/invoices/contract.yaml'
+  
+transformations:
+  custom_module: 
+  custom_function: 'transform_transcation'  # Optional, if empty uses generic transformation
+  
+paths:
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/seu/31a/invoices'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/invoices'

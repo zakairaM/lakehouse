@@ -1,0 +1,39 @@
+version: 1.0
+connection_id: 'api_chargebee'
+connection_type: 'API'
+enabled: true
+
+source:
+  11U:
+    base_url: "https://flexmail-test.chargebee.com"
+    endpoint: "api/v2"
+    auth_mode: "basic"
+    token: "test_HVo04cuO0FmC8hc2l8EMydLvNIm15aT5l"
+    document_types:
+      invoices:
+        category: "invoices"
+      credit_notes:
+        category: "credit_notes"
+      items:
+        category: "items"
+      item_prices:
+        category: "item_prices"
+      payments_refunds:
+        category: "transactions"
+      #card_refund:
+        #category: "card_refund"
+      customers:
+        category: "customers"
+
+destination:
+  catalog: 'teamblue_finance'
+  schema: 'default'
+  volume: 'sagacity-data-teamblue-finance-dev'
+  base_path: 'raw/billing'
+
+autoloader_options:
+  includeExistingFiles: false
+  cloudFiles:
+    format: 'json'
+    SchemaEvolutionMode: 'addNewColumns'
+    inferColumnTypes: 'true'

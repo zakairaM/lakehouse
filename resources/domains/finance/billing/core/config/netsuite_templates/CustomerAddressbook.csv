@@ -1,0 +1,7 @@
+Name;Type
+addressbookAddress;Address
+defaultBilling;boolean
+defaultShipping;boolean
+internalId;string
+isResidential;boolean
+label;string

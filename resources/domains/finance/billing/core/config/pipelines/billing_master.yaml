@@ -1,0 +1,49 @@
+version: '1.0'
+pipelines:
+  - entity_code: '15E'
+    region: 'nordics'
+    document_types: ['invoices']
+    ingestion_type: 'sftp'
+    enabled: True
+
+  - entity_code: '32H-E'
+    region: 'seu'
+    document_types: ['invoices', 'payments', 'customers', 'items']
+    ingestion_type: 'api'
+    enabled: False
+
+  - entity_code: '11B'
+    region: 'benelux'
+    document_types: ['invoices','invoice_lines','providers','items','customers']
+    ingestion_type: 'sftp'
+    enabled: False
+  
+  - entity_code: '11T'
+    region: 'benelux'
+    document_types: ['invoices','invoice_lines','providers','items','customers']
+    ingestion_type: 'sftp'
+    enabled: False
+  
+  - entity_code: '11G'
+    region: 'benelux'
+    document_types: ['invoices','invoice_lines','providers','items','customers']
+    ingestion_type: 'sftp'
+    enabled: False
+  
+  - entity_code: '11U' 
+    region: 'benelux'
+    document_types: ['invoices','credit_notes','payments_refunds','customers','items','item_prices']
+    ingestion_type: 'api'
+    enabled: False
+  
+  - entity_code: '31A'
+    region: 'seu'
+    document_types: ['items','transactions','customers']
+    ingestion_type: 'sftp'
+    enabled: False
+  
+  - entity_code: '31A-SF'
+    region: 'seu'
+    document_types: ['invoices','customers','items']
+    ingestion_type: 'sftp'
+    enabled: False

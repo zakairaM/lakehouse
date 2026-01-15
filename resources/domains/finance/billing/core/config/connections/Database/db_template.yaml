@@ -1,0 +1,23 @@
+version: '1.0'
+connection_id: 'db_template'
+connection_type: 'Database'
+enabled: false
+
+database:
+  type: 'mysql'  # mysql, postgresql, sqlserver, oracle
+  host: '${secrets/database/host}'
+  port: 3306
+  database: '${secrets/database/name}'
+  username: '${secrets/database/username}'
+  password: '${secrets/database/password}'
+  
+  query_template: |
+    SELECT * FROM {table_name} 
+    WHERE updated_at >= '{last_run_timestamp}'
+    ORDER BY updated_at
+
+destination:
+  catalog: 'teamblue_finance'
+  schema: 'default'
+  volume: 'sagacity-data-teamblue-finance-dev'
+  base_path: 'raw/billing'

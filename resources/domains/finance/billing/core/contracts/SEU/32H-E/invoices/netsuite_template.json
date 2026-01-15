@@ -1,0 +1,43 @@
+{
+        "External ID": "32H-E-INV-ΤΠΥ-E1-645136",
+        "Date": "2025-10-24T00:00:00.000000+02:00",
+        "Currency (currency)": "1",
+        "Custom fields": 
+            {
+          "Record Source ID (Custom body)": "2",
+          "Billing Systems Customer Id (Custom body)": "32H-E-CUS-PA-0326425",
+          "Billing System Reference (Custom body)": "ΤΠΥ-E1-645136"
+            },
+        "Item list": 
+                {
+                    "Item": 
+                    [
+                        {
+                        "Custom fields": 
+                                        {
+                                        "Billing Systems Item Code (Custom column)": "32H-E-ITM-002.009",
+                                        "Rev Rec Start Date (Custom column)": "2025-10-01T00:00:00.000000+02:00",
+                                        "Rev Rec End Date (Custom column)": "2026-09-30T00:00:00.000000+02:00",
+                                        "Contract Start Date (Custom column)": "2025-10-24T00:00:00.000000+02:00",
+                                        "Contract End Date (Custom column)": "2026-10-24T00:00:00.000000+02:00"
+                                        },
+                        "Amount": 19.5,
+                        "Item External ID": "32H-E-ITM-002.009",
+                        "Tax Code ID": 26175,
+                        "Quantity": 1,
+                        "Rate": 19.5,
+                        "Description": "Ανανέωση Ονόματος Χώρου COM",
+                        "Rev rec start date": "2025-10-01T00:00:00.000000+02:00",
+                        "Rev rec end date": "2026-09-30T00:00:00.000000+02:00",
+                        "Tax 1 amt": 4.68
+                        }
+                    ]
+        },
+        "Customer": "32H-E-CUS-PA-0326425",
+        "Exchange rate": "1",
+        "Memo": "3975184",
+        "Subsidiary": "30",
+        "Terms": "4",
+        "Internal ID": "23140012"
+}
+      

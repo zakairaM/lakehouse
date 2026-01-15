@@ -1,0 +1,224 @@
+document_type: "invoice"
+version: "1.0"
+description: "Triple mapping for 15E (Nordics) Invoice - Source → DWH → NetSuite"
+source_type: "sftp"
+region: "nordics"
+entity_code: "15E"
+
+# Mapping: Source → NetSuite
+# target_column is the NetSuite field name (camelCase)
+# Silver layer will automatically convert to snake_case (e.g., externalId → external_id)
+# For nested fields: Invoice.itemList uses InvoiceItemList.csv -> InvoiceItem.csv templates
+mappings:
+  # Invoice header fields
+  - source_column: "invoice_id"
+    source_type: "string"
+    target_column: "externalId"
+    target_type: "string"
+
+  - source_column: "customer_id"
+    source_type: "string"
+    target_column: "entity"
+    target_type: "RecordRef"
+
+  - source_column: "entity_code"
+    source_type: "string"
+    target_column: "subsidiary"
+    target_type: "RecordRef"
+
+  - source_column: "invoice_date"
+    source_type: "date"
+    target_column: "tranDate"
+    target_type: "dateTime"
+
+  - source_column: "payment_terms"
+    source_type: "string"
+    target_column: "terms"
+    target_type: "RecordRef"
+
+  - source_column: "invoice_currency"
+    source_type: "string"
+    target_column: "currency"
+    target_type: "RecordRef"
+
+  - source_column: "memo"
+    source_type: "string"
+    target_column: "memo"
+    target_type: "string"
+
+  # Invoice body custom fields (transactionBodyCustomField)
+  - source_column: "record_source_id"
+    source_type: "string"
+    target_column: "custbody_nb2_recsource"
+    target_type: "CustomField"
+
+  - source_column: "bill_sys_customer_num"
+    source_type: "string"
+    target_column: "custbody_nb2_invbillsyscustnum"
+    target_type: "CustomField"
+
+  - source_column: "billing_sys_ref"
+    source_type: "string"
+    target_column: "custbody_nb2_billing_sys_ref"
+    target_type: "CustomField"
+
+  - source_column: "billing_sys_file_id"
+    source_type: "string"
+    target_column: "custbody_nb2_billingsys_file"
+    target_type: "CustomField"
+
+  # Invoice line item fields (nested in NetSuite as itemList.item.*)
+  # Invoice.itemList -> InvoiceItemList.csv -> InvoiceItem.csv templates
+  - source_column: "item_external_id"
+    source_type: "string"
+    target_column: "Invoice.itemList.item.item"
+    target_type: "RecordRef"
+
+  - source_column: "description"
+    source_type: "string"
+    target_column: "Invoice.itemList.item.description"
+    target_type: "string"
+
+  - source_column: "quantity"
+    source_type: "decimal"
+    target_column: "Invoice.itemList.item.quantity"
+    target_type: "double"
+
+  - source_column: "rate"
+    source_type: "decimal"
+    target_column: "Invoice.itemList.item.rate"
+    target_type: "double"
+
+  - source_column: "amount"
+    source_type: "decimal"
+    target_column: "Invoice.itemList.item.amount"
+    target_type: "double"
+
+  - source_column: "department_id"
+    source_type: "string"
+    target_column: "Invoice.itemList.item.department"
+    target_type: "RecordRef"
+
+  - source_column: "class_external_id"
+    source_type: "string"
+    target_column: "Invoice.itemList.item.class"
+    target_type: "RecordRef"
+
+  - source_column: "tax_1_amt"
+    source_type: "decimal"
+    target_column: "Invoice.itemList.item.tax1Amt"
+    target_type: "double"
+
+  # Revenue recognition fields
+  - source_column: "rev_rec_start_date"
+    source_type: "date"
+    target_column: "Invoice.itemList.item.revRecStartDate"
+    target_type: "dateTime"
+
+  - source_column: "rev_rec_end_date"
+    source_type: "date"
+    target_column: "Invoice.itemList.item.revRecEndDate"
+    target_type: "dateTime"
+
+  # Line item custom fields (transactionColumnCustomField)
+  - source_column: "bill_sys_item_code"
+    source_type: "string"
+    target_column: "Invoice.itemList.item.customFieldList.custcol_nb2_invbillsysitemnum"
+    target_type: "CustomField"
+
+  - source_column: "contract_start_date"
+    source_type: "date"
+    target_column: "Invoice.itemList.item.customFieldList.custcol_nb2_contract_start_date"
+    target_type: "CustomField"
+
+  - source_column: "contract_end_date"
+    source_type: "date"
+    target_column: "Invoice.itemList.item.customFieldList.custcol_nb2_contract_end_date"
+    target_type: "CustomField"
+
+  - source_column: "billing_system_line_id"
+    source_type: "string"
+    target_column: "Invoice.itemList.item.customFieldList.custcol_billing_system_line_uniq_id"
+    target_type: "CustomField"
+
+  # Additional metadata fields (not mapped to NetSuite)
+  - source_column: "platform"
+    target_column: null
+
+  - source_column: "brand"
+    target_column: null
+
+  - source_column: "legal_entity"
+    target_column: null
+
+  - source_column: "is_invoice"
+    target_column: null
+
+  - source_column: "reference_invoice_id"
+    target_column: null
+
+  - source_column: "is_intercompany"
+    target_column: null
+
+# NetSuite Configuration
+netsuite_config:
+  object_type: "Invoice"
+  operation: "upsertList"
+  batch_size: 100
+  retry_attempts: 3
+  timeout_seconds: 30
+  
+  # Required fields for NetSuite Invoice (using template field names)
+  required_fields:
+    - "externalId"
+    - "entity"
+    - "subsidiary"
+    - "tranDate"
+  
+  # Optional fields
+  optional_fields:
+    - "tranId"
+    - "memo"
+    - "currency"
+    - "terms"
+  
+  # Line items configuration
+  line_items:
+    object_type: "InvoiceItem"
+    list_field: "itemList"
+    replace_all: true
+  
+  # Custom fields for 15E (transaction body)
+  # These are stored in custom_field_list and handled dynamically
+  custom_fields:
+    - "custbody_nb2_recsource"
+    - "custbody_nb2_invbillsyscustnum"
+    - "custbody_nb2_billing_sys_ref"
+    - "custbody_nb2_billingsys_file"
+  
+  # Line item custom fields
+  line_item_custom_fields:
+    - "custcol_nb2_invbillsysitemnum"
+    - "custcol_nb2_rev_start_date"
+    - "custcol_nb2_rev_end_date"
+    - "custcol_nb2_contract_start_date"
+    - "custcol_nb2_contract_end_date"
+    - "custcol_billing_system_line_uniq_id"
+
+# Lookup Tables
+lookups:
+  subsidiary_map:
+    "15E": 36  # Nordics subsidiary ID
+  
+  currency_map:
+    "SEK": 1   # Swedish Krona
+    "EUR": 2   # Euro
+    "USD": 3   # US Dollar
+  
+  customer_map:
+    # Will be populated from customer upserts
+    # Maps customer_id to ns_internal_id
+  
+  item_map:
+    # Will be populated from item upserts
+    # Maps item_id to ns_internal_id

@@ -1,0 +1,58 @@
+version: 1.0
+connection_id: 'api_entersoft'
+connection_type: 'API'
+enabled: true
+
+source:
+  32H-E:
+    base_url: "https://api.entersoft.gr"
+    endpoint: "/api/rpc/PublicQuery/"
+    auth_mode: "header"
+    login_params:
+      login_url: "/api/login/login"
+      payload:
+        SubscriptionID: "enartia"
+        SubscriptionPassword: "!Enartia1"
+        BridgeID: "Ecom"
+        Model:
+          UserID: "webapi"
+          Password: "En@rti@"
+          BranchID: "1"
+          LangID: "en-US"
+        Claims:
+          ESApplicationID: "ecomfreeconnector"
+    document_types:
+      invoices:
+        entity: "Documents"
+        params: "ADRegistrationDate"
+        category: "Web_Scrolls"
+      payments:
+        entity: 'Collections'
+        params: "ADRegistrationDate"
+        category: "Web_Scrolls"
+      customers:
+        entity: 'Web_ClientsList'
+        params:
+          - "ESDModified"
+          - "ESDCreated"
+        category: "Web_Scrolls"
+      items:
+        entity: 'Web_Items'
+        params:
+          - "ESDModified"
+          - "ESDCreated"
+        category: "Web_Scrolls"
+
+destination:
+  catalog: 'teamblue_finance'
+  schema: 'default'
+  volume: 'sagacity-data-teamblue-finance-dev'
+  base_path: 'raw/billing'
+
+autoloader_options:
+  includeExistingFiles: false
+  cloudFiles:
+    format: 'json'
+    SchemaEvolutionMode: 'addNewColumns'
+    inferColumnTypes: 'true'
+

@@ -1,0 +1,5 @@
+Name;Type
+authCode;RecordRef
+authCodeAmtRemaining;double
+authCodeApplied;double
+giftCertAvailable;double

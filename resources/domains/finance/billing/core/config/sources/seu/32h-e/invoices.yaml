@@ -1,0 +1,27 @@
+version: '1.0'
+entity_code: '32H-E'
+region: 'SEU'
+enabled: true
+
+connection:
+  connection_ref: 'api_entersoft'  # Links to connections/API/api_entersoft.yaml
+  
+document:
+  document_type: 'invoices'
+  file_pattern: '*.json'
+  format: 'json'
+  json_options:
+    multiline: true
+    inferSchema: true
+  json_column_extract: 'Rows'
+  
+contract:
+  contract_path: 'contracts/SEU/32H-E/invoices/contract.yaml'
+  
+transformations:
+  custom_module: 'resources.domains.finance.billing.core.transformations.custom.SEU.32H-E.invoice'  # Optional
+  custom_function: 'apply_transformation'  # Optional, if empty uses generic transformation
+  
+paths:
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/seu/32h-e/invoices'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/invoices'

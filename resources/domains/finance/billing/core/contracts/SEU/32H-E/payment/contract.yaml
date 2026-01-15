@@ -1,0 +1,115 @@
+document_type: "payment"
+version: "1.0"
+description: "Triple mapping for 32H (SEU) Payment - Source → DWH → NetSuite"
+source_type: "api"
+region: "SEU"
+entity_code: "32H"
+
+# Triple mapping: Source → DWH → NetSuite
+mappings:
+  # Payment fields
+  - source_column: "payment_id"
+    source_type: "string"
+    dwh_column: "payment_id"
+    dwh_type: "string"
+    netsuite_field: "Payment.externalId"
+    netsuite_type: "string"
+
+  - source_column: "customer_id"
+    source_type: "string"
+    dwh_column: "customer_id"
+    dwh_type: "string"
+    netsuite_field: "Payment.entity"
+    netsuite_type: "RecordRef"
+
+  - source_column: "payment_amount"
+    source_type: "string"
+    dwh_column: "payment_amount"
+    dwh_type: "decimal(15,2)"
+    netsuite_field: "Payment.amount"
+    netsuite_type: "decimal"
+
+  - source_column: "payment_currency"
+    source_type: "string"
+    dwh_column: "payment_currency"
+    dwh_type: "string"
+    netsuite_field: "Payment.currency"
+    netsuite_type: "RecordRef"
+
+  - source_column: "payment_date"
+    source_type: "string"
+    dwh_column: "payment_date"
+    dwh_type: "date"
+    netsuite_field: "Payment.tranDate"
+    netsuite_type: "date"
+
+  - source_column: "payment_method"
+    source_type: "string"
+    dwh_column: "payment_method"
+    dwh_type: "string"
+    netsuite_field: "Payment.paymentMethod"
+    netsuite_type: "RecordRef"
+
+  - source_column: "reference_number"
+    source_type: "string"
+    dwh_column: "reference_number"
+    dwh_type: "string"
+    netsuite_field: "Payment.tranId"
+    netsuite_type: "string"
+
+  - source_column: "platform"
+    source_type: "string"
+    dwh_column: "platform"
+    dwh_type: "string"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "brand"
+    source_type: "string"
+    dwh_column: "brand"
+    dwh_type: "string"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "is_intercompany"
+    source_type: "string"
+    dwh_column: "is_intercompany"
+    dwh_type: "boolean"
+    netsuite_field: null
+    netsuite_type: null
+
+# NetSuite Configuration
+netsuite_config:
+  object_type: "Payment"
+  operation: "upsertList"
+  batch_size: 100
+  retry_attempts: 3
+  timeout_seconds: 30
+  
+  # Required fields for NetSuite Payment
+  required_fields:
+    - "Payment.externalId"
+    - "Payment.entity"
+    - "Payment.amount"
+    - "Payment.tranDate"
+  
+  # Optional fields
+  optional_fields:
+    - "Payment.currency"
+    - "Payment.paymentMethod"
+    - "Payment.tranId"
+
+# Lookup Tables
+lookups:
+  subsidiary_map:
+    "32H": 37  # SEU subsidiary ID
+  
+  currency_map:
+    "EUR": 2   # Euro
+    "USD": 3   # US Dollar
+    "GBP": 4   # British Pound
+  
+  payment_method_map:
+    "credit_card": 1
+    "bank_transfer": 2
+    "cash": 3

@@ -1,0 +1,25 @@
+resources:
+  pipelines:
+    billing_dlt_pipeline_raw_to_bronze:
+      name: "Billing Pipeline - RAW → Bronze"
+      catalog: "teamblue_finance"
+      schema: "bronze"
+      
+      continuous: false
+      development: false
+      
+      libraries:
+        - notebook:
+            path: /Workspace/Users/margarida.sampaio@team.blue/billing_standard_project_margarida/src/domains/finance/billing/transformation/billing_dlt_pipeline_raw_to_bronze
+      
+      clusters:
+        - label: "default"
+          serverless: true 
+      
+      configuration:
+        raw_base_path: "/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/raw/billing"
+        pipeline_name: "billing_dlt_pipeline_raw_to_bronze"
+      
+      notifications:
+        - email_recipients: ["data-engineering@team.blue"]
+          alerts: ["on-update-failure", "on-update-success"]

@@ -1,0 +1,132 @@
+document_type: "item"
+version: "1.0"
+description: "Item contract for 32H (SEU) - Source to Silver to NetSuite mapping"
+source_type: "api"
+region: "seu"
+entity_code: "32H"
+
+# Source to Silver mapping
+source_to_silver:
+  - source_column: "itemCode"
+    target_column: "item_id"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: true
+    description: "Item unique identifier"
+    validation_rules: ["not_null", "unique"]
+    transformations: []
+    notes: "Item code from Entersoft API"
+  
+  - source_column: "ItemDescription"
+    target_column: "item_name"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: true
+    description: "Item description"
+    validation_rules: ["not_null"]
+    transformations: []
+    notes: "Item description from API"
+  
+  - source_column: "ItemAlternativeDescription"
+    target_column: "item_description"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: false
+    description: "Alternative item description"
+    validation_rules: []
+    transformations: []
+    notes: "Alternative description for the item"
+  
+  - source_column: "Price"
+    target_column: "price"
+    source_data_type: "decimal"
+    target_data_type: "decimal(15,2)"
+    required: false
+    description: "Item price"
+    validation_rules: []
+    transformations: []
+    notes: "Price of the item"
+  
+  - source_column: "RetailPrice"
+    target_column: "retail_price"
+    source_data_type: "decimal"
+    target_data_type: "decimal(15,2)"
+    required: false
+    description: "Retail price"
+    validation_rules: []
+    transformations: []
+    notes: "Retail price of the item"
+  
+  - source_column: "32H"
+    target_column: "entity"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: true
+    description: "Entity code"
+    validation_rules: ["not_null"]
+    transformations: ["literal('32H')"]
+    notes: "Fixed value for 32H entity"
+
+# Silver to NetSuite mapping
+silver_to_netsuite:
+  - silver_column: "item_id"
+    netsuite_field: "externalId"
+    netsuite_type: "string"
+    required: true
+    soap_mapping: "Item.externalId"
+    description: "Item external ID for upsert"
+  
+  - silver_column: "item_name"
+    netsuite_field: "itemId"
+    netsuite_type: "string"
+    required: true
+    soap_mapping: "Item.itemId"
+    description: "Item ID visible in NetSuite"
+  
+  - silver_column: "item_description"
+    netsuite_field: "displayName"
+    netsuite_type: "string"
+    required: false
+    soap_mapping: "Item.displayName"
+    description: "Item display name"
+  
+  - silver_column: "price"
+    netsuite_field: "basePrice"
+    netsuite_type: "decimal"
+    required: false
+    soap_mapping: "Item.basePrice"
+    description: "Base price of the item"
+  
+  - silver_column: "entity"
+    netsuite_field: "subsidiary"
+    netsuite_type: "RecordRef"
+    required: true
+    soap_mapping: "Item.subsidiary"
+    nested: true
+    lookup: "subsidiary_map"
+    description: "Subsidiary reference based on entity"
+
+# NetSuite SOAP Configuration
+netsuite_config:
+  object_type: "Item"
+  operation: "upsertList"
+  batch_size: 100
+  retry_attempts: 3
+  timeout_seconds: 30
+  
+  # Required fields for NetSuite Item
+  required_fields:
+    - "externalId"
+    - "itemId"
+    - "subsidiary"
+  
+  # Optional fields
+  optional_fields:
+    - "displayName"
+    - "basePrice"
+
+# Lookup Tables
+lookups:
+  subsidiary_map:
+    "32H": 37  # SEU subsidiary ID (to be confirmed)
+

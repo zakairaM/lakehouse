@@ -1,0 +1,39 @@
+version: '1.0'
+entity_code: '11B'
+region: 'benelux'
+enabled: true
+
+connection:
+  connection_ref: 'sftp_donnington'
+  source_path: 'BEL/11B/ingress/prod/'
+
+is_zip: true
+
+document:
+  document_type: 'items'
+  file_pattern: '*products.csv'
+  format: 'csv'
+  csv_options:
+    quote: "\""
+    encoding: 'UTF-16'
+    header: true
+    delimiter: ';'
+    inferSchema: true 
+  
+expectations:
+  "ProductId_not_null": "ProductId IS NOT NULL"
+  "ProductCode_not_null": "ProductCode IS NOT NULL"
+  "ProductName_not_null": "ProductName IS NOT NULL"
+  "ProductGroupId_not_null": "ProductGroupId IS NOT NULL"
+
+contract:
+  contract_path: 'contracts/benelux/11b/items/contract.yaml'
+  
+transformations:
+  custom_module: #'resources.domains.finance.billing.core.transformations.custom.benelux.11.products'  # Optional
+  custom_function: 'transform_invoice'  # Optional, if empty uses generic transformation
+  
+paths:
+  # Auto-constructed from connection + entity + region + document_type
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/benelux/11b/items'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/items'

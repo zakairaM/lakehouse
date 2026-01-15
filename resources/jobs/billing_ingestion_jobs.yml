@@ -1,0 +1,68 @@
+resources:
+  jobs:
+    # Job: Database to RAW
+    db_to_raw:
+      name: "Billing - Database to RAW"
+      tasks:
+        - task_key: "db_ingestion"
+          notebook_task:
+            notebook_path: "/Workspace/Users/margarida.sampaio@team.blue/billing_standard_project_margarida/src/domains/finance/billing/ingestion/db_loader"
+          # ===============================
+          # Original cluster configuration (commented out)
+          # new_cluster:
+          #   spark_version: "14.3.x-scala2.12"
+          #   node_type_id: "i3.xlarge"
+          #   num_workers: 1
+          #   autoscale:
+          #     min_workers: 1
+          #     max_workers: 3
+          # ===============================
+          # Run on serverless compute
+          serverless: true
+          timeout_seconds: 3600
+          max_retries: 2
+          retry_on_timeout: true
+
+    # Job: SFTP to RAW
+    sftp_to_raw:
+      name: "Billing - SFTP to RAW"
+      tasks:
+        - task_key: "sftp_ingestion"
+          notebook_task:
+            notebook_path: "/Workspace/Users/margarida.sampaio@team.blue/billing_standard_project_margarida/src/domains/finance/billing/ingestion/sftp_loader"
+          # ===============================
+          # Original cluster configuration (commented out)
+          # new_cluster:
+          #   spark_version: "14.3.x-scala2.12"
+          #   node_type_id: "i3.xlarge"
+          #   num_workers: 1
+          #   autoscale:
+          #     min_workers: 1
+          #     max_workers: 3
+          # ===============================
+          serverless: true
+          timeout_seconds: 3600
+          max_retries: 2
+          retry_on_timeout: true
+
+    # Job: API to RAW
+    api_to_raw:
+      name: "Billing - API to RAW"
+      tasks:
+        - task_key: "api_ingestion"
+          notebook_task:
+            notebook_path: "/Workspace/Users/margarida.sampaio@team.blue/billing_standard_project_margarida/src/domains/finance/billing/ingestion/api_loader"
+          # ===============================
+          # Original cluster configuration (commented out)
+          # new_cluster:
+          #   spark_version: "14.3.x-scala2.12"
+          #   node_type_id: "i3.xlarge"
+          #   num_workers: 1
+          #   autoscale:
+          #     min_workers: 1
+          #     max_workers: 3
+          # ===============================
+          serverless: true
+          timeout_seconds: 3600
+          max_retries: 2
+          retry_on_timeout: true

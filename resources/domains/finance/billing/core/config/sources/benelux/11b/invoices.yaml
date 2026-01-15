@@ -1,0 +1,45 @@
+version: '1.0'
+entity_code: '11B'
+region: 'benelux'
+enabled: true
+
+connection:
+  connection_ref: 'sftp_donnington'
+  source_path: 'BEL/11B/ingress/prod/'
+
+is_zip: true
+
+document:
+  document_type: 'invoices'
+  file_pattern: '*invoices.csv'
+  format: 'csv'
+  csv_options:
+    quote: "\""
+    encoding: 'UTF-16'
+    header: true
+    delimiter: ';'
+    inferSchema: true 
+
+expectations:
+  "InvoiceId_not_null": "InvoiceId IS NOT NULL"
+  "InvoiceNumber_not_null": "InvoiceNumber IS NOT NULL"
+  "ProviderId_not_null": "ProviderId IS NOT NULL"
+  "CustomerKey_not_null": "CustomerKey IS NOT NULL"
+  "InvoiceDate_not_null": "InvoiceDate IS NOT NULL"
+  "TaxPercentage_not_null": "TaxPercentage IS NOT NULL"
+  "Currency_not_null": "Currency IS NOT NULL"
+  "ExchangeRate_not_null": "ExchangeRate IS NOT NULL"
+  "ExchangeRate_positive": "ExchangeRate > 0"
+  "IsCreditNote_valid": "IsCreditNote IN (0, 1)"
+  
+contract:
+  contract_path: 'contracts/benelux/11b/invoice/contract.yaml'
+  
+transformations:
+  custom_module: #'resources.domains.finance.billing.core.transformations.custom.benelux.11.invoices'  # Optional
+  custom_function: 'transform_invoice'  # Optional, if empty uses generic transformation
+  
+paths:
+  # Auto-constructed from connection + entity + region + document_type
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/benelux/11b/invoices'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/invoice'

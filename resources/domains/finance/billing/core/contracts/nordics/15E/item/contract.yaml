@@ -1,0 +1,82 @@
+document_type: "item"
+version: "1.0"
+description: "Triple mapping for 15E (Nordics) Item - Source → DWH → NetSuite"
+source_type: "sftp"
+region: "nordics"
+entity_code: "15E"
+
+# Mapping: Source → NetSuite
+# target_column is the NetSuite field name (camelCase)
+# Silver layer will automatically convert to snake_case
+# Note: 15E uses Custom Record "Staged Item" (@customrecord_nbtbn_staged_item), not standard Item
+mappings:
+  # Standard Custom Record fields
+  - source_column: "item_id"
+    source_type: "string"
+    target_column: "externalId"
+    target_type: "string"
+
+  - source_column: "item_name"
+    source_type: "string"
+    target_column: "name"
+    target_type: "string"
+
+  # Custom fields for Staged Item
+  - source_column: "sales_description"
+    source_type: "string"
+    target_column: "custrecord_nbtbn_staged_item_sales_desc"
+    target_type: "CustomField"
+
+  - source_column: "entity_code"
+    source_type: "string"
+    target_column: "custrecord_nbtbn_staged_item_entity"
+    target_type: "CustomField"
+
+  - source_column: "subsidiary_id"
+    source_type: "string"
+    target_column: "custrecord_nbtbn_staged_item_subsidiary"
+    target_type: "CustomField"
+
+  - source_column: "income_account_id"
+    source_type: "string"
+    target_column: "custrecord_nbtbn_staged_item_income_acc"
+    target_type: "CustomField"
+
+  - source_column: "class_id"
+    source_type: "string"
+    target_column: "custrecord_nbtbn_staged_item_class"
+    target_type: "CustomField"
+
+  - source_column: "department_id"
+    source_type: "string"
+    target_column: "custrecord_nbtbn_staged_item_department"
+    target_type: "CustomField"
+
+# NetSuite Configuration
+netsuite_config:
+  # Custom Record type for 15E Staged Items
+  object_type: "customrecord_nbtbn_staged_item"
+  record_type: "customrecord_nbtbn_staged_item"
+  operation: "upsertList"
+  batch_size: 100
+  retry_attempts: 3
+  timeout_seconds: 30
+  
+  # Required fields for Staged Item
+  required_fields:
+    - "externalId"
+    - "name"
+  
+  # Optional/custom fields
+  optional_fields:
+    - "custrecord_nbtbn_staged_item_sales_desc"
+    - "custrecord_nbtbn_staged_item_entity"
+    - "custrecord_nbtbn_staged_item_subsidiary"
+    - "custrecord_nbtbn_staged_item_income_acc"
+    - "custrecord_nbtbn_staged_item_class"
+    - "custrecord_nbtbn_staged_item_department"
+
+# Lookup Tables
+lookups:
+  subsidiary_map:
+    "15E": 36  # Nordics subsidiary ID (used in subsidiary array)

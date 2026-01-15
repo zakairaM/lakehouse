@@ -1,0 +1,55 @@
+version: '1.0'
+entity_code: '15E'
+region: 'nordics'
+enabled: true
+
+connection:
+  connection_ref: 'sftp_donnington'  
+  source_path: 'LPA/15E/ingress/prod/INV/'
+  archive_path: 'LPA/15E/archive/prod/INV/'
+
+
+is_zip: false
+
+document:
+  document_type: 'invoices'
+  file_pattern: '*.csv'
+  format: 'csv'
+  csv_options:
+    header: true
+    delimiter: ','
+    inferSchema: true
+    encoding: 'UTF-8'  
+
+expectations:
+  "invoice_id_not_null": "invoice_id IS NOT NULL"
+  "platform_not_null": "platform IS NOT NULL"
+  "brand_not_null": "brand IS NOT NULL"
+  "legal_entity_not_null": "legal_entity IS NOT NULL"
+  "customer_id_not_null": "customer_id IS NOT NULL"
+  "country_not_null": "country IS NOT NULL"
+  #"invoice_date_not_null": "invoice_date IS NOT NULL"
+  "invoice_currency_not_null": "invoice_currency IS NOT NULL"
+  "invoice_line_id_not_null": "invoice_line_id IS NOT NULL"
+  "item_id_not_null": "item_id IS NOT NULL"
+  "quantity_not_null": "quantity IS NOT NULL"
+  "rate_not_null": "rate IS NOT NULL"
+  "contract_start_date_not_null": "contract_start_date IS NOT NULL"
+  "contract_end_date_not_null": "contract_end_date IS NOT NULL"
+  "rev_rec_start_date_not_null": "rev_rec_start_date IS NOT NULL"
+  "rev_rec_end_date_not_null": "rev_rec_end_date IS NOT NULL"
+  "tax_amount_not_null": "tax_amount IS NOT NULL"
+  "is_intercompany_not_null": "is_intercompany IS NOT NULL"
+  "is_invoice_valid": "is_invoice IN (0, 1)"
+
+  
+contract:
+  contract_path: 'contracts/nordics/15E/invoices/contract.yaml'
+  
+transformations:
+  custom_module: 'resources.domains.finance.billing.core.transformations.custom.nordics.15E.invoice'  # Optional
+  
+paths:
+  # Auto-constructed from connection + entity + region + document_type
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/nordics/15E/invoices'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/invoice'

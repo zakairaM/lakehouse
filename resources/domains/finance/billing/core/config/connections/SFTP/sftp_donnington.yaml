@@ -1,0 +1,23 @@
+version: '1.0'
+connection_id: 'sftp_donnington'
+connection_type: 'SFTP'
+enabled: true
+
+source:
+  catalog: 'teamblue'
+  schema: 'default'
+  volume: 'teamblue-client'
+  base_path: 'standard_test'
+
+destination:
+  catalog: 'teamblue_finance'
+  schema: 'default'
+  volume: 'sagacity-data-teamblue-finance-dev'
+  base_path: 'raw/billing'
+  # Full path: /Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/raw/billing/{region}/{entity}/{document_type}/YYYY/MM/dd/
+
+autoloader_options:
+  includeExistingFiles: false
+  cloudFiles.format: 'json'
+  cloudFiles.schemaEvolutionMode: 'addNewColumns'
+  cloudFiles.inferColumnTypes: 'true'

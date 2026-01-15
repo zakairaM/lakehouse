@@ -1,0 +1,180 @@
+document_type: "payment"
+version: "1.0"
+description: "Payment contract for 32H (SEU) - Source to Silver to NetSuite mapping"
+source_type: "api"
+region: "seu"
+entity_code: "32H"
+
+# Source to Silver mapping
+source_to_silver:
+  - source_column: "PaymentID"
+    target_column: "payment_id"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: true
+    description: "Payment unique identifier"
+    validation_rules: ["not_null", "unique"]
+    transformations: []
+    notes: "Payment ID from Entersoft API"
+  
+  - source_column: "ADRegistrationDate"
+    target_column: "payment_date"
+    source_data_type: "date"
+    target_data_type: "date"
+    required: true
+    description: "Payment registration date"
+    validation_rules: ["not_null"]
+    transformations: ["convert_date(source_format=yyyy-MM-dd)"]
+    notes: "Date when the payment was registered"
+  
+  - source_column: "CustomerID"
+    target_column: "customer_id"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: true
+    description: "Customer identifier"
+    validation_rules: ["not_null"]
+    transformations: []
+    notes: "Customer ID from API"
+  
+  - source_column: "AccountCode"
+    target_column: "account_code"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: true
+    description: "Account code"
+    validation_rules: ["not_null"]
+    transformations: []
+    notes: "Code representing the customer account"
+  
+  - source_column: "fCurrencyCode"
+    target_column: "currency"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: true
+    description: "Currency code"
+    validation_rules: ["not_null", "length:3"]
+    transformations: []
+    notes: "Currency code for the transaction"
+  
+  - source_column: "CurrencyValue"
+    target_column: "amount"
+    source_data_type: "decimal"
+    target_data_type: "decimal(15,2)"
+    required: true
+    description: "Payment amount"
+    validation_rules: ["not_null", "greater_than:0"]
+    transformations: []
+    notes: "Transaction amount in the specified currency"
+  
+  - source_column: "ADAlternativeCode"
+    target_column: "reference"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: true
+    description: "Payment reference"
+    validation_rules: ["not_null"]
+    transformations: []
+    notes: "Alternative code/reference for payment"
+  
+  - source_column: "32H"
+    target_column: "entity"
+    source_data_type: "string"
+    target_data_type: "string"
+    required: true
+    description: "Entity code"
+    validation_rules: ["not_null"]
+    transformations: ["literal('32H')"]
+    notes: "Fixed value for 32H entity"
+
+# Silver to NetSuite mapping
+silver_to_netsuite:
+  - silver_column: "payment_id"
+    netsuite_field: "externalId"
+    netsuite_type: "string"
+    required: true
+    soap_mapping: "CustomerPayment.externalId"
+    description: "Payment external ID for upsert"
+  
+  - silver_column: "customer_id"
+    netsuite_field: "customer"
+    netsuite_type: "RecordRef"
+    required: true
+    soap_mapping: "CustomerPayment.customer"
+    nested: true
+    lookup: "customer_map"
+    description: "Customer reference"
+  
+  - silver_column: "payment_date"
+    netsuite_field: "paymentDate"
+    netsuite_type: "date"
+    required: true
+    soap_mapping: "CustomerPayment.paymentDate"
+    description: "Payment date"
+  
+  - silver_column: "amount"
+    netsuite_field: "amount"
+    netsuite_type: "decimal"
+    required: true
+    soap_mapping: "CustomerPayment.amount"
+    description: "Payment amount"
+  
+  - silver_column: "currency"
+    netsuite_field: "currency"
+    netsuite_type: "RecordRef"
+    required: true
+    soap_mapping: "CustomerPayment.currency"
+    nested: true
+    lookup: "currency_map"
+    description: "Currency reference"
+  
+  - silver_column: "reference"
+    netsuite_field: "memo"
+    netsuite_type: "string"
+    required: false
+    soap_mapping: "CustomerPayment.memo"
+    description: "Payment reference/memo"
+  
+  - silver_column: "entity"
+    netsuite_field: "subsidiary"
+    netsuite_type: "RecordRef"
+    required: true
+    soap_mapping: "CustomerPayment.subsidiary"
+    nested: true
+    lookup: "subsidiary_map"
+    description: "Subsidiary reference based on entity"
+
+# NetSuite SOAP Configuration
+netsuite_config:
+  object_type: "CustomerPayment"
+  operation: "upsertList"
+  batch_size: 100
+  retry_attempts: 3
+  timeout_seconds: 30
+  
+  # Required fields for NetSuite CustomerPayment
+  required_fields:
+    - "externalId"
+    - "customer"
+    - "paymentDate"
+    - "amount"
+    - "subsidiary"
+  
+  # Optional fields
+  optional_fields:
+    - "currency"
+    - "memo"
+
+# Lookup Tables
+lookups:
+  subsidiary_map:
+    "32H": 37  # SEU subsidiary ID (to be confirmed)
+  
+  currency_map:
+    "EUR": 2   # Euro
+    "USD": 3   # US Dollar
+  
+  customer_map:
+    # Will be populated from customer upserts
+    # Maps customer_id to ns_internal_id
+

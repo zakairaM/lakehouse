@@ -1,0 +1,34 @@
+source_column;target_column;source_data_type;target_data_type;required;description;validation_rules;transformations;notes
+ADCode;invoice_id;string;string;yes;Unique invoice identifier;["not_null";"unique"];;Primary key for invoice (ADCode from Entersoft)
+ADCode;invoice_number;string;string;yes;Invoice number for display;["not_null"];;Customer-facing invoice number
+32H;entity;string;string;yes;Entity code;["not_null"];"literal('32H')";Fixed value for 32H entity
+Enartia;platform;string;string;yes;Source platform name;["not_null"];"literal('Enartia')";Platform: Enartia
+Enartia;brand;string;string;yes;Brand name;["not_null"];"literal('Enartia')";Brand: Enartia
+Enartia S.A.;legal_entity;string;string;yes;Legal entity name;["not_null"];"literal('Enartia S.A.')";Legal entity from entities.csv
+CustomerCode;customer_id;string;string;yes;Customer unique identifier;["not_null"];;Must exist in customer dimension
+;first_name;string;string;no;Customer first name;[];;Not available in API - will come from customer table
+;last_name;string;string;no;Customer last name;[];;Not available in API - will come from customer table
+;company_name;string;string;no;Company name;[];;Will come from customer table
+1;is_company;string;boolean;yes;Is customer a company;["not_null"];"literal('1')";Default to company (1=company)
+EUR;customer_currency;string;string;yes;Customer default currency;["not_null";"length:3"];"literal('EUR')";Default currency for Greece
+;tax_reg_number;string;string;no;Tax registration number;[];;Will come from customer table
+GR;country;string;string;yes;Country code;["not_null";"length:2"];"literal('GR')";Greece ISO code
+ADRegistrationDate;invoice_date;string;date;yes;Invoice transaction date;["not_null"];"convert_date(source_format=yyyy-MM-dd)";Convert to standard date format
+PaymentTerms;payment_terms;string;string;yes;Payment terms in days;["not_null"];;Number of days for payment from API
+EUR;invoice_currency;string;string;yes;Invoice currency;["not_null";"length:3"];"literal('EUR')";Invoice currency EUR
+1;is_invoice;string;boolean;yes;Is this an invoice;["not_null"];"literal('1')";Default to invoice (1=invoice 0=credit_memo)
+;reference_invoice_id;string;string;no;Reference to original invoice;[];;For credit memos and adjustments
+0;is_intercompany;string;boolean;yes;Is intercompany transaction;["not_null"];"literal('0')";Default to external (0=external)
+GID;invoice_line_id;string;string;yes;Unique line identifier;["not_null"];;Unique per invoice line from GID
+ServiceCode;item_id;string;string;yes;Item/product identifier;["not_null"];;Service code from API
+ServiceDescription;item_name;string;string;yes;Item/product name;["not_null"];;Service description from API
+;department;string;string;no;Department code;[];;NetSuite department mapping (to be defined)
+Quantity;quantity;string;decimal(15,4);yes;Item quantity;["not_null";"greater_than:0"];;Must be positive
+Price;rate;string;decimal(15,2);yes;Unit price;["not_null";"greater_than_equal:0"];;Price per unit
+CurrencyNetValue;amount;string;decimal(15,2);yes;Line total amount;["not_null";"greater_than_equal:0"];;Net value in currency
+CurrencyVATValue;tax_amount;string;decimal(15,2);yes;Tax amount for line;["not_null";"greater_than_equal:0"];;VAT amount from API
+;contract_start_date;string;date;no;Contract start date;[];;For subscription items (not in API - to be calculated)
+;contract_end_date;string;date;no;Contract end date;[];;For subscription items (not in API - to be calculated)
+;rev_rec_start_date;string;date;no;Revenue recognition start;[];;For revenue recognition (to be calculated)
+;rev_rec_end_date;string;date;no;Revenue recognition end;[];;For revenue recognition (to be calculated)
+0;is_recurring;string;boolean;yes;Is recurring revenue;["not_null"];"literal('0')";Default to one-time (0=one-time, to be refined)

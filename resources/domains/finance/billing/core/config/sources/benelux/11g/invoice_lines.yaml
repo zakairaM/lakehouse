@@ -1,0 +1,51 @@
+version: '1.0'
+entity_code: '11G'
+region: 'benelux'
+enabled: true
+
+connection:
+  connection_ref: 'sftp_donnington' 
+  source_path: 'BEL/11G/ingress/prod/'
+
+is_zip: true
+
+document:
+  document_type: 'invoice_lines'
+  file_pattern: '*invoicelines.csv'
+  format: 'csv'
+  csv_options:
+    quote: "\""
+    encoding: 'UTF-16'
+    header: true
+    delimiter: ';'
+    inferSchema: true 
+
+expectations:
+  "InvoiceId_not_null": "InvoiceId IS NOT NULL"
+  "InvoiceLineId_not_null": "InvoiceLineId IS NOT NULL"
+  "UnitPrice_not_null": "UnitPrice IS NOT NULL"
+  "Quantity_not_null": "Quantity IS NOT NULL"
+  "TaxPercentage_not_null": "TaxPercentage IS NOT NULL"
+  "TaxTotal_not_null": "TaxTotal IS NOT NULL"
+  "TotalTaxExcl_not_null": "TotalTaxExcl IS NOT NULL"
+  "TotalTaxIncl_not_null": "TotalTaxIncl IS NOT NULL"
+  "StartDate_not_null": "StartDate IS NOT NULL"
+  "EndDate_not_null": "EndDate IS NOT NULL"
+  "Description_not_null": "Description IS NOT NULL"
+  "ProductCode_not_null": "ProductCode IS NOT NULL"
+  "ProductGroupCode_not_null": "ProductGroupCode IS NOT NULL"
+  "CountryCode_not_null": "CountryCode IS NOT NULL"
+  "VATCountryCode_not_null": "VATCountryCode IS NOT NULL"
+  "TaxPercentage_valid": "TaxPercentage RLIKE '^\\d+(\\.\\d+)?$'"
+  
+contract:
+  contract_path: 'contracts/benelux/11g/invoicelines/contract.yaml'
+  
+transformations:
+  custom_module: #'resources.domains.finance.billing.core.transformations.custom.benelux.11.invoice_lines'  # Optional
+  custom_function: 'transform_invoice'  # Optional, if empty uses generic transformation
+  
+paths:
+  # Auto-constructed from connection + entity + region + document_type
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/benelux/11g/invoice_lines'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/invoice'

@@ -1,0 +1,4 @@
+Name;Type
+lastModifiedDate;dateTime
+subscribed;boolean
+subscription;RecordRef

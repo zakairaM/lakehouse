@@ -1,0 +1,15 @@
+﻿Name;Type
+addr1;string
+addr2;string
+addr3;string
+addressee;string
+addrPhone;string
+addrText;string
+attention;string
+city;string
+country;Country
+customFieldList;CustomFieldList
+internalId;string
+override;boolean
+state;string
+zip;string

@@ -1,0 +1,5 @@
+Name;Type
+expiration;dateTime
+file;RecordRef
+licenseCode;string
+remainingDownloads;long

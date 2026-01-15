@@ -1,0 +1,142 @@
+entity;legal_entity;brand;business_unit;division;country;region;continent
+40Y;Accessiway Austria;Accessiway;Accessiway;SaaS Products;Austria;DACH;Europe
+40Z;Accessiway gmbh;Accessiway;Accessiway;SaaS Products;Germany;DACH;Europe
+41D;Accessiway Holding Lux Sarl;Accessiway;Accessiway;SaaS Products;Luxembourg;Benelux;Europe
+41C;Accessiway SaS;Accessiway;Accessiway;SaaS Products;France;WEU;Europe
+40X;Accessiway Srl;Accessiway;Accessiway;SaaS Products;Italy;SEU;Europe
+40Q;Billdu;Billdu;Billdu;SaaS Products;Slovakia;CEE;Europe
+40S;Invoice Generator s.r.o;Invoice Generator;Billdu;SaaS Products;Slovakia;CEE;Europe
+40T;Invoice Maker Pro s.r.o.;Invoice Maker Pro;Billdu;SaaS Products;Slovakia;CEE;Europe
+40H;Consent Manager;Consent Manager;Consent Manager;SaaS Products;Germany;DACH;Europe
+40I;Consentmanager AB;Consent Manager;Consent Manager;SaaS Products;Sweden;Nordics;Europe
+40K;Consentmanager Gmbh;Consent Manager;Consent Manager;SaaS Products;Germany;DACH;Europe
+40J;Consentmanager SAS;Consent Manager;Consent Manager;SaaS Products;France;WEU;Europe
+40W;Extendify;Extendify;Extendify;SaaS Products;United States;NAM;NAM
+40P;Hellocash;Hellocash;Hellocash;SaaS Products;Austria;DACH;Europe
+11R;Byte B.V;Hypernode;Hypernode;SaaS Products;Netherlands;Benelux;Europe
+21L;Hipex B.V.;Hipex;Hypernode;SaaS Products;Netherlands;Benelux;Europe
+40R;Complianz B.V.;Complianz;Iubenda;SaaS Products;Netherlands;Benelux;Europe
+41E;Digital Data Solutions B.V;Cookiefirst;Iubenda;SaaS Products;Netherlands;Benelux;Europe
+40E;Iubenda;Iubenda;Iubenda;SaaS Products;Italy;SEU;Europe
+40D;Iubenda Spain;Iubenda;Iubenda;SaaS Products;Spain;SEU;Europe
+40V;Kolsquare;Kolsquare;Kolsquare;SaaS Products;France;WEU;Europe
+40O;Futy;Futy;Leadinfo;SaaS Products;Netherlands;Benelux;Europe
+40L;Leadcamp;Leadcamp;Leadinfo;SaaS Products;Netherlands;Benelux;Europe
+40G;Leadinfo;Leadinfo;Leadinfo;SaaS Products;Netherlands;Benelux;Europe
+12G;team.blue GmbH;team.blue;Leadinfo;SaaS Products;Germany;DACH;Europe
+40M;Maxcluster;Maxcluster;Maxcluster;SaaS Products;Germany;DACH;Europe
+40U;Metricool;Metricool;Metricool;SaaS Products;Spain;SEU;Europe
+40F;Raidboxes;Raidboxes;Raidboxes;SaaS Products;Germany;DACH;Europe
+22G;Really Siml Really Simple Plugins B.V.;Really Simple Plugins;RSP;SaaS Products;Netherlands;Benelux;Europe
+40N;Simplybook.me;Simplybook.me;Simplybook;SaaS Products;Cyprus;SEU;Europe
+40C;Anonymouse Domains s.r.o.;Anonymouse Domains;Webnode;SaaS Products;Czech Republic;CEE;Europe
+40A;Webnode AG;Webnode;Webnode;SaaS Products;Switzerland;DACH;Europe
+40B;Webnode CZ, s.r.o.;Webnode;Webnode;SaaS Products;Czech Republic;CEE;Europe
+12F;Beat.it Inc.;Beat.it;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+11P;Combell B.V.;Combell;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+11B;Combell Group B.V.;Combell;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+11F;Combell Holding ApS;Combell;Combell;Web Presence & Hosting;Denmark;Nordics;Europe
+11G;Combell N.V.;Combell;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+11T;Easyhost BV;Easyhost;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+11U;Flexmail N.V.;Flexmail;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+12B;Ijoko Comm V;Ijoko;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+11E;Intelligent Holding B.V.;Intelligent;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+11D;Intelligent Midholding B.V.;Intelligent;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+12C;NCC1701 Comm V;NCC1701;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+12D;Nucleus N.V.;Nucleus;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+11X;Rellant Inc.;Rellant;Combell;Web Presence & Hosting;Belgium;Benelux;Europe
+11W;team.blue Bulgaria Ltd (Intelligent Services Ltd.;team.blue;Combell;Web Presence & Hosting;Bulgaria;Balkans;Europe
+11S;Register N.V.;Register;Register Group;Web Presence & Hosting;Belgium;Benelux;Europe
+11A;team.blue N.V.;team.blue;Corporate Services;Corporate;Belgium;Benelux;Europe
+10G;team.blue Equityco Sarl;team.blue;Corporate Services;Corporate;Luxembourg;Benelux;Europe
+10F;team.blue Finco;team.blue;Corporate Services;Corporate;Luxembourg;Benelux;Europe
+10D;team.blue Holdco;team.blue;Corporate Services;Corporate;Luxembourg;Benelux;Europe
+10C;team.blue Mezzco;team.blue;Corporate Services;Corporate;Luxembourg;Benelux;Europe
+10E;team.blue Midco;team.blue;Corporate Services;Corporate;Luxembourg;Benelux;Europe
+10B;team.blue PIKco;team.blue;Corporate Services;Corporate;Luxembourg;Benelux;Europe
+10A;team.blue Topco;team.blue;Corporate Services;Corporate;Luxembourg;Benelux;Europe
+12I;team.blue NV (Presence);team.blue;Presence Support;Corporate;Belgium;Benelux;Europe
+41B;team.blue lda;team.blue;Shared Service Center;Corporate;Portugal;SEU;Europe
+41A;team.blue NV (SaaS);team.blue;Success Support;Corporate;Belgium;Benelux;Europe
+15J;Active 24 s.r.o.;Active 24;Loopia Group;Web Presence & Hosting;Czech Republic;CEE;Europe
+15H;Planeetta Internet Oy;Planeetta;Loopia Group;Web Presence & Hosting;Finland;Nordics;Europe
+15K;Servage Gmbh;Servage;Loopia Group;Web Presence & Hosting;Germany;DACH;Europe
+15G;Websupport Magyarorszag Kft;Websupport;Loopia Group;Web Presence & Hosting;Hungary;CEE;Europe
+12H;team.blue Scandinavia AS;team.blue;Loopia Group;Web Presence & Hosting;Norway;Nordics;Europe
+15I;Loopia doo;Loopia;Loopia Group;Web Presence & Hosting;Serbia;Balkans;Europe
+15F;Websupport s.r.o.;Websupport;Loopia Group;Web Presence & Hosting;Slovakia;CEE;Europe
+15E;Loopia AB;Loopia;Loopia Group;Web Presence & Hosting;Sweden;Nordics;Europe
+15D;Loopia Group AB;Loopia;Loopia Group;Web Presence & Hosting;Sweden;Nordics;Europe
+15B;Loopia Holding I AB;Loopia;Loopia Group;Web Presence & Hosting;Sweden;Nordics;Europe
+15A;Loopia Holding II AB;Loopia;Loopia Group;Web Presence & Hosting;Sweden;Nordics;Europe
+15C;Loopia Holding III AB;Loopia;Loopia Group;Web Presence & Hosting;Sweden;Nordics;Europe
+21K;1 Eurohosting B.V.;1 Eurohosting;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+21J;Breedband BV;Breedband;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+21I;CloudVPS B.V.;CloudVPS;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+21D;DDS City B.V.;DDS City;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+11Q;Hosting XS B.V.;Hosting XS;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+21A;IT-Ernity Holding B.V.;IT-Ernity;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+21C;IT-ernity Internet Services B.V.;IT-ernity;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+11Z;IXL Hosting B.V.;IXL Hosting;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+21E;Proserve B.V.;Proserve;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+21H;Signet B.V.;Signet;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+22A;Spango Internet B.V.;Spango;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+20B;team.blue NL (former TransIP Group B.V.);team.blue;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+12A;Topservers B.V.;Topservers;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+20C;TransIP B.V.;TransIP;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+20A;Tribe Subco B.V.;Tribe;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+21F;VDX Internet Services B.V.;VDX;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+22D;Vimexx BV;Vimexx;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+21G;Webstekker B.V.;Webstekker;TransIP Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+13A;Superhosting BG OCD;Superhosting;Superhosting;Web Presence & Hosting;Bulgaria;Balkans;Europe
+13B;Superhosting DOO BEOGRAD-SI-ARI-GRAD;Superhosting;Superhosting;Web Presence & Hosting;Serbia;Balkans;Europe
+32I;Enartia d.o.o.;Enartia;Enartia;Web Presence & Hosting;Greece;SEU;Europe
+32H;Enartia S.A.;Enartia;Enartia;Web Presence & Hosting;Greece;SEU;Europe
+32K;Host.al Shpk;Host.al;Enartia;Web Presence & Hosting;Albania;Balkans;Europe
+32J;MINT HOSTING d.o.o.;MINT HOSTING;Enartia;Web Presence & Hosting;Greece;SEU;Europe
+32C;�izgi Telekom�nikasyon Anonim Sirketi;Natro;Natro;Web Presence & Hosting;Turkey;SEE_Turkey;Europe
+32S;�izgi Telekom�nikasyon Anonim ?irketi (USD);Natro;Natro;Web Presence & Hosting;Turkey;SEE_Turkey;Europe
+32D;Nics Telekom�nikasyon Anonim Sirketi;Natro;Natro;Web Presence & Hosting;Turkey;SEE_Turkey;Europe
+32T;Nics Telekom�nikasyon Anonim ?irketi (USD);Natro;Natro;Web Presence & Hosting;Turkey;SEE_Turkey;Europe
+32L;Turhost;Turhost;Turhost;Web Presence & Hosting;Turkey;SEE_Turkey;Europe
+32U;Turhost (Aerotek Bili?im Sanayi ve Ticaret (USD);Turhost;Turhost;Web Presence & Hosting;Turkey;SEE_Turkey;Europe
+11K;Surftown A/S;Surftown;Zitcom;Web Presence & Hosting;Denmark;Nordics;Europe
+11I;team.blue Denmark A/S (Zitcom A/S);team.blue;Zitcom;Web Presence & Hosting;Denmark;Nordics;Europe
+11H;team.blue Nordic ApS (Zitcom HoldCo ApS);team.blue;Zitcom;Web Presence & Hosting;Denmark;Nordics;Europe
+31U;Agence de Media Numerisques;Agence de Media Numerisques;Register Group;Web Presence & Hosting;France;WEU;Europe
+31C;Clarence SRL;Clarence;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+30B;Dali Holdings Limited;Dali Holdings;Register Group;Web Presence & Hosting;Cyprus;SEU;Europe
+30D;Dali Italy Holdco S.p.A.;Dali Italy Holdco;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+30E;Dali Italy Midco S.p.A.;Dali Italy Midco;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+32A;Dominiando SRL;Dominiando;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+31V;Etinet SRL;Etinet;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+31B;Fueps Srl;Fueps;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+32E;Keliweb S.p.a.;Keliweb;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+31A;Register S.p.A;Register.it;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+31Z;Sfera network SRL;Sfera network;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+30A;team.blue Italy S.p.A.;team.blue;Register Group;Web Presence & Hosting;Italy;SEU;Europe
+31X;Amen World Servicios Internet;Amen;Register Group;Web Presence & Hosting;Portugal;SEU;Europe
+31Y;Dominos.pt;Dominos.pt;Register Group;Web Presence & Hosting;Portugal;SEU;Europe
+31W;Iberweb Lda;Iberweb;Register Group;Web Presence & Hosting;Portugal;SEU;Europe
+32F;PTISP (ALMOUROLTEC - SERVI�OS DE INFORMATICA E INT;PTISP;Register Group;Web Presence & Hosting;Portugal;SEU;Europe
+32P;WeProvide Lda (WPS);WeProvide;Register Group;Web Presence & Hosting;Portugal;SEU;Europe
+31T;Amen NL B.V.;Amen;Register Group;Web Presence & Hosting;Netherlands;Benelux;Europe
+32G;Configbox Internet SL;Configbox;Register Group;Web Presence & Hosting;Spain;SEU;Europe
+31S;Nominalia Internet SL;Nominalia;Register Group;Web Presence & Hosting;Spain;SEU;Europe
+32B;Ubilibet;Ubilibet;Register Group;Web Presence & Hosting;Spain;SEU;Europe
+32Q;Webempresa Europa S.L.;Webempresa;Register Group;Web Presence & Hosting;Spain;SEU;Europe
+11Y;Switchplus A.G.;Switchplus;Swizzonic;Web Presence & Hosting;Switzerland;DACH;Europe
+32N;Swizzonic;Swizzonic;Swizzonic;Web Presence & Hosting;Switzerland;DACH;Europe
+31R;Digital Media Internet Servers Ltd;Digital Media Internet Servers;UK & IE Hosting;Web Presence & Hosting;Ireland;UK_Ireland;Europe
+31O;Namesco Ireland Ltd;Namesco;UK & IE Hosting;Web Presence & Hosting;Ireland;UK_Ireland;Europe
+31Q;Team Blue Internet Services IE Ltd;team.blue;UK & IE Hosting;Web Presence & Hosting;Ireland;UK_Ireland;Europe
+32M;Catalyst2 Services Ltd;Catalyst2;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe
+31E;LCN.com Ltd;LCN.com;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe
+31J;Namesco Inc;Namesco;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe
+31M;Poundhost Internet Ltd;Poundhost;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe
+31K;Simply Transit Ltd;Simply Transit;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe
+31L;Simply Virtual Services Ltd;Simply Virtual Services;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe
+31H;Simply.com Ltd;Simply.com;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe
+31N;Tagadab Ltd;Tagadab;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe
+31D;Team Blue Internet Services UK Ltd;team.blue;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe
+32O;UK Dedicated Ltd;UK Dedicated;UK & IE Hosting;Web Presence & Hosting;United Kingdom;UK_Ireland;Europe

@@ -1,0 +1,55 @@
+version: '1.0'
+entity_code: '31A'
+region: 'benelux'
+enabled: true
+
+connection:
+  connection_ref: 'sftp_donnington'
+  source_path: 'ITA/31A/ingress/prod/'
+
+is_zip: true
+
+document:
+  document_type: 'customers'
+  file_pattern: 'esporta_clienti*'
+  format: 'txt'
+  csv_options:
+    quote: "\""
+    encoding: 'UTF-8'
+    header: false
+    delimiter: '\t'
+    inferSchema: false
+  header_schema:
+    - sap_billingcode
+    - organisation
+    - c2
+    - address
+    - zip
+    - city
+    - province
+    - country
+    - lang
+    - phone
+    - fax
+    - mobile
+    - email
+    - vatcode
+    - fiscalcode
+    - coge
+    - abi
+    - cab
+    - cc
+    - paymentcode
+    - c20
+    - code
+  
+contract:
+  contract_path: 'contracts/seu/31a/customers/contract.yaml'
+  
+transformations:
+  custom_module: 
+  custom_function: 'transform_customer'  # Optional, if empty uses generic transformation
+  
+paths:
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/seu/31a/customers'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/customers'

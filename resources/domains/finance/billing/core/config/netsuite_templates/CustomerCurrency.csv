@@ -1,0 +1,13 @@
+Name;Type
+balance;double
+consolBalance;double
+consolDepositBalance;double
+consolOverdueBalance;double
+consolUnbilledOrders;double
+currency;RecordRef
+depositBalance;double
+displaySymbol;string
+overdueBalance;double
+overrideCurrencyFormat;boolean
+symbolPlacement;CurrencySymbolPlacement
+unbilledOrders;double

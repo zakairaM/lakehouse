@@ -1,0 +1,232 @@
+document_type: "invoice"
+version: "1.0"
+description: "Triple mapping for 32H (SEU) Invoice - Source → DWH → NetSuite with combined fields"
+source_type: "api"
+region: "SEU"
+entity_code: "32H"
+
+# Triple mapping: Source → DWH → NetSuite
+mappings:
+  # Invoice header fields
+  - source_column: "invoice_id"
+    source_type: "string"
+    dwh_column: "invoice_id"
+    dwh_type: "string"
+    netsuite_field: "Invoice.externalId"
+    netsuite_type: "string"
+
+  - source_column: "invoice_number"
+    source_type: "string"
+    dwh_column: "invoice_number"
+    dwh_type: "string"
+    netsuite_field: "Invoice.tranId"
+    netsuite_type: "string"
+
+  - source_column: "customer_id"
+    source_type: "string"
+    dwh_column: "customer_id"
+    dwh_type: "string"
+    netsuite_field: "Invoice.entity"
+    netsuite_type: "RecordRef"
+
+  - source_column: "32H"
+    source_type: "string"
+    dwh_column: "entity"
+    dwh_type: "string"
+    netsuite_field: "Invoice.subsidiary"
+    netsuite_type: "RecordRef"
+
+  - source_column: "platform"
+    source_type: "string"
+    dwh_column: "platform"
+    dwh_type: "string"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "brand"
+    source_type: "string"
+    dwh_column: "brand"
+    dwh_type: "string"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "legal_entity"
+    source_type: "string"
+    dwh_column: "legal_entity"
+    dwh_type: "string"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "invoice_date"
+    source_type: "string"
+    dwh_column: "invoice_date"
+    dwh_type: "date"
+    netsuite_field: "Invoice.tranDate"
+    netsuite_type: "date"
+
+  - source_column: "payment_terms"
+    source_type: "string"
+    dwh_column: "payment_terms"
+    dwh_type: "string"
+    netsuite_field: "Invoice.terms"
+    netsuite_type: "RecordRef"
+
+  - source_column: "invoice_currency"
+    source_type: "string"
+    dwh_column: "invoice_currency"
+    dwh_type: "string"
+    netsuite_field: "Invoice.currency"
+    netsuite_type: "RecordRef"
+
+  - source_column: "is_invoice"
+    source_type: "string"
+    dwh_column: "is_invoice"
+    dwh_type: "boolean"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "reference_invoice_id"
+    source_type: "string"
+    dwh_column: "reference_invoice_id"
+    dwh_type: "string"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "is_intercompany"
+    source_type: "string"
+    dwh_column: "is_intercompany"
+    dwh_type: "boolean"
+    netsuite_field: null
+    netsuite_type: null
+
+  # Invoice line fields
+  - source_column: "invoice_line_id"
+    source_type: "string"
+    dwh_column: "invoice_line_id"
+    dwh_type: "string"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "item_id"
+    source_type: "string"
+    dwh_column: "item_id"
+    dwh_type: "string"
+    netsuite_field: "InvoiceItem.item"
+    netsuite_type: "RecordRef"
+
+  - source_column: "item_name"
+    source_type: "string"
+    dwh_column: "item_name"
+    dwh_type: "string"
+    netsuite_field: "InvoiceItem.description"
+    netsuite_type: "string"
+
+  - source_column: "quantity"
+    source_type: "string"
+    dwh_column: "quantity"
+    dwh_type: "decimal(15,4)"
+    netsuite_field: "InvoiceItem.quantity"
+    netsuite_type: "decimal"
+
+  - source_column: "rate"
+    source_type: "string"
+    dwh_column: "rate"
+    dwh_type: "decimal(15,2)"
+    netsuite_field: "InvoiceItem.rate"
+    netsuite_type: "decimal"
+
+  - source_column: "amount"
+    source_type: "string"
+    dwh_column: "amount"
+    dwh_type: "decimal(15,2)"
+    netsuite_field: "InvoiceItem.amount"
+    netsuite_type: "decimal"
+
+  - source_column: "tax_amount"
+    source_type: "string"
+    dwh_column: "tax_amount"
+    dwh_type: "decimal(15,2)"
+    netsuite_field: null
+    netsuite_type: null
+
+  # Contract fields
+  - source_column: "contract_start_date"
+    source_type: "string"
+    dwh_column: "contract_start_date"
+    dwh_type: "date"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "contract_end_date"
+    source_type: "string"
+    dwh_column: "contract_end_date"
+    dwh_type: "date"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "rev_rec_start_date"
+    source_type: "string"
+    dwh_column: "rev_rec_start_date"
+    dwh_type: "date"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "rev_rec_end_date"
+    source_type: "string"
+    dwh_column: "rev_rec_end_date"
+    dwh_type: "date"
+    netsuite_field: null
+    netsuite_type: null
+
+  - source_column: "is_recurring"
+    source_type: "string"
+    dwh_column: "is_recurring"
+    dwh_type: "boolean"
+    netsuite_field: null
+    netsuite_type: null
+
+# NetSuite Configuration
+netsuite_config:
+  object_type: "Invoice"
+  operation: "upsertList"
+  batch_size: 100
+  retry_attempts: 3
+  timeout_seconds: 30
+  
+  # Required fields for NetSuite Invoice
+  required_fields:
+    - "Invoice.externalId"
+    - "Invoice.entity"
+    - "Invoice.subsidiary"
+    - "Invoice.tranDate"
+  
+  # Optional fields
+  optional_fields:
+    - "Invoice.tranId"
+    - "Invoice.memo"
+    - "Invoice.currency"
+    - "Invoice.terms"
+  
+  # Line items configuration
+  line_items:
+    object_type: "InvoiceItem"
+    list_field: "Invoice.itemList"
+    replace_all: true
+
+# Lookup Tables
+lookups:
+  subsidiary_map:
+    "32H": 37  # SEU subsidiary ID
+  
+  currency_map:
+    "EUR": 2   # Euro
+    "USD": 3   # US Dollar
+    "GBP": 4   # British Pound
+  
+  customer_map:
+    # Will be populated from customer upserts
+    # Maps customer_id to ns_internal_id
+  
+  item_map:
+    # Will be populated from item upserts
+    # Maps item_id to ns_internal_id

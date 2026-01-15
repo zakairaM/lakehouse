@@ -1,0 +1,8 @@
+Name;Type
+contact;RecordRef
+email;string
+giveAccess;boolean
+password;string
+password2;string
+role;RecordRef
+sendEmail;boolean

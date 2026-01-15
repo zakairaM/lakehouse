@@ -1,0 +1,39 @@
+# This is a Databricks asset bundle definition for teamblue_lakehouse.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: teamblue_lakehouse
+  uuid: e95b8652-f6b9-4bbf-ac6f-da8b56dca596
+
+include:
+  - resources/*.yml
+  - resources/*/*.yml
+  - resources/domains/finance/billing/jobs/*.yml
+
+targets:
+  dev:
+    # The default target uses 'mode: development' to create a development copy.
+    # - Deployed resources get prefixed with '[dev my_user_name]'
+    # - Any job schedules and triggers are paused by default.
+    # See also https://docs.databricks.com/dev-tools/bundles/deployment-modes.html.
+    mode: development
+    default: true
+    workspace:
+      host: https://sagacitysolutions-teamblue-workspace.cloud.databricks.com
+    
+    # Sync configuration: specify which files to upload
+    sync:
+      include:
+        - "src/**"
+      exclude:
+        - "**/__pycache__/**"
+        - "**/*.pyc"
+
+  prod:
+    mode: production
+    workspace:
+      host: https://sagacitysolutions-teamblue-workspace.cloud.databricks.com
+      # We explicitly deploy to /Workspace/Users/lucas.ventura@team.blue to make sure we only have a single copy.
+      root_path: /Workspace/Users/lucas.ventura@team.blue/.bundle/${bundle.name}/${bundle.target}
+    permissions:
+      - user_name: lucas.ventura@team.blue
+        level: CAN_MANAGE

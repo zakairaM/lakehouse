@@ -1,0 +1,28 @@
+version: '1.0'
+entity_code: '11U'
+region: 'benelux'
+enabled: true
+
+connection:
+  connection_ref: 'api_chargebee' 
+  
+document:
+  document_type: 'item_prices'
+  file_pattern: '*.json'
+  format: 'json'
+  json_options:
+    multiline: true
+    inferSchema: true
+  json_column_extract: 'list'
+  
+contract:
+  contract_path: 'contracts/benelux/11u/item_prices/contract.yaml'
+  
+transformations:
+  custom_module: 'resources.domains.finance.billing.core.transformations.custom.benelux.11U.item_prices'  # Optional
+  custom_function: 'apply_transformation'  # Optional, if empty uses generic transformation
+  
+paths:
+  # Auto-constructed from connection + entity + region + document_type
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/benelux/11u/item_prices'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/invoices'

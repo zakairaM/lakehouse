@@ -1,0 +1,5 @@
+source_column,target_column,data_type,is_nullable,default_value,transformation_rule,description
+# TODO: Add contract mappings for customers
+# Example:
+# customer_id,customer_id,string,false,,trim|upper,Customer identifier
+

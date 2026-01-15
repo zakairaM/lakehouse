@@ -1,0 +1,94 @@
+document_type: "customer"
+version: "1.0"
+description: "Triple mapping for 15E (Nordics) Customer - Source → DWH → NetSuite"
+source_type: "sftp"
+region: "nordics"
+entity_code: "15E"
+
+# Mapping: Source → NetSuite
+# target_column is the NetSuite field name (camelCase)
+# Silver layer will automatically convert to snake_case (e.g., externalId → external_id)
+# For nested structures: Customer.addressbookList uses CustomerAddressbookList.csv template
+mappings:
+  # Core Customer fields
+  - source_column: "customer_id"
+    source_type: "string"
+    target_column: "externalId"
+    target_type: "string"
+
+  - source_column: "first_name"
+    source_type: "string"
+    target_column: "firstName"
+    target_type: "string"
+
+  - source_column: "last_name"
+    source_type: "string"
+    target_column: "lastName"
+    target_type: "string"
+
+  - source_column: "company_name"
+    source_type: "string"
+    target_column: "companyName"
+    target_type: "string"
+
+  - source_column: "tax_reg_number"
+    source_type: "string"
+    target_column: "vatRegNumber"
+    target_type: "string"
+
+  # RecordRef fields (values will be used for RecordRef.internalId in NetSuite)
+  - source_column: "entity_code"
+    source_type: "string"
+    target_column: "subsidiary"
+    target_type: "RecordRef"
+
+  - source_column: "customer_currency"
+    source_type: "string"
+    target_column: "currency"
+    target_type: "RecordRef"
+
+  # Address fields (nested in addressbookList)
+  # Customer.addressbookList -> CustomerAddressbookList.csv template
+  - source_column: "country"
+    source_type: "string"
+    target_column: "Customer.addressbookList.addressbook.addressbookAddress.country"
+    target_type: "Country"
+
+  # Custom fields (entity-level custom fields)
+  - source_column: "bill_system_customer_num"
+    source_type: "string"
+    target_column: "custentity_nb2_billsyscustnum"
+    target_type: "CustomField"
+
+# NetSuite Configuration
+netsuite_config:
+  object_type: "Customer"
+  operation: "upsertList"
+  batch_size: 100
+  retry_attempts: 3
+  timeout_seconds: 30
+  
+  # Required fields for NetSuite Customer
+  required_fields:
+    - "Customer.externalId"
+    - "Customer.entityId"
+    - "Customer.subsidiary"
+  
+  # Optional fields
+  optional_fields:
+    - "Customer.firstName"
+    - "Customer.lastName"
+    - "Customer.companyName"
+    - "Customer.email"
+    - "Customer.phone"
+    - "Customer.currency"
+
+# Lookup Tables
+lookups:
+  subsidiary_map:
+    "15E": 36  # Nordics subsidiary ID
+  
+  currency_map:
+    "SEK": 1   # Swedish Krona
+    "EUR": 2   # Euro
+    "USD": 3   # US Dollar

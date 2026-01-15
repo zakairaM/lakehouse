@@ -1,0 +1,12 @@
+Name;Type
+cardState;RecordRef
+ccDefault;boolean
+ccExpireDate;dateTime
+ccMemo;string
+ccName;string
+ccNumber;string
+debitcardIssueNo;string
+internalId;string
+paymentMethod;RecordRef
+stateFrom;dateTime
+validfrom;dateTime

@@ -1,0 +1,49 @@
+version: '1.0'
+entity_code: '31A-SF'
+region: 'benelux'
+enabled: true
+
+connection:
+  connection_ref: 'sftp_donnington'
+  source_path: 'ITA/31A-SF/ingress/prod/'
+
+is_zip: true
+
+document:
+  document_type: 'invoices'
+  file_pattern: '*invoices*'
+  format: 'txt'
+  csv_options:
+    quote: "\""
+    encoding: 'UTF-8'
+    header: true
+    delimiter: "\t"
+    inferSchema: true
+
+expectations:
+  "document_number_not_null": "document_number IS NOT NULL"
+  "customer_id_not_null": "customer_id IS NOT NULL"
+  "document_date_format": "document_date IS NOT NULL"
+  "document_type_valid": "document_type IN ('NC','FE')"
+  "payment_code_not_null": "payment_code IS NOT NULL"
+  "currency_not_null": "currency IS NOT NULL"
+  "vat_code_not_null": "vat_code IS NOT NULL"
+  "document_registry_not_null": "document_registry IS NOT NULL"
+  "description_not_null": "description IS NOT NULL"
+  "accounting_code_not_null": "accounting_code IS NOT NULL"
+  "quantity_not_null": "quantity IS NOT NULL"
+  "amount_not_null": "amount IS NOT NULL"
+  "product_id_not_null": "product_id IS NOT NULL"
+  "start_date_format_not_null": "start_date IS NOT NULL"
+  "end_date_format_not_null": "end_date IS NOT NULL"
+  
+contract:
+  contract_path: 'contracts/seu/31A-SF/invoices/contract.yaml'
+  
+transformations:
+  custom_module: 
+  custom_function: 'transform_customer'  # Optional, if empty uses generic transformation
+  
+paths:
+  checkpoint_bronze: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/bronze/billing/seu/31a-sf/invoices'
+  checkpoint_silver: '/Volumes/teamblue_finance/default/sagacity-data-teamblue-finance-dev/_checkpoints/silver/billing/invoices'

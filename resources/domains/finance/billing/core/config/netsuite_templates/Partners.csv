@@ -1,0 +1,5 @@
+Name;Type
+contribution;double
+isPrimary;boolean
+partner;RecordRef
+partnerRole;RecordRed

@@ -1,0 +1,6 @@
+Name;Type
+amount;double
+amountDue;double
+dueDate;dateTime
+seqNum;int
+status;string

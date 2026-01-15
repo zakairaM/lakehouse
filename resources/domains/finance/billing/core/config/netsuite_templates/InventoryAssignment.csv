@@ -1,0 +1,11 @@
+Name;Type
+binNumber;RecordRef
+expirationDate;dateTime
+internalId;string
+inventoryStatus;RecordRef
+issueInventoryNumber;RecordRef
+quantity;double
+quantityAvailable;double
+receiptInventoryNumber;string
+toBinNumber;RecordRef
+toInventoryStatus;RecordRef
